@@ -328,7 +328,6 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       border: 2px solid transparent;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      animation: fadeInUp 0.6s ease backwards;
       position: relative;
     }
     .menu-item:hover {
@@ -616,6 +615,21 @@
       to { opacity: 1; }
     }
 
+    /* ✅ MOBILE ENTRANCE ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+      transition:
+        opacity 0.6s ease,
+        transform 0.6s cubic-bezier(.2,.8,.2,1);
+      will-change: transform, opacity;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
     /* Responsive */
 /* ============================= */
 /* ✅ TRUE MOBILE UX OVERRIDE ✅ */
@@ -679,20 +693,25 @@ body {
   height: 64px;
 }
 
-/* --- STICKY TABS (REAL MOBILE UX) --- */
+/* 🔥 MOBILE: Fix corrupted sticky tabs */
 .tabs-wrapper {
   position: sticky;
   top: 0;
-  z-index: 999;
-  background: linear-gradient(180deg, #1a1812, #2b271e);
+  z-index: 9999;
+  background: #2b271e;
   padding: 12px 0 14px;
   margin-bottom: 18px;
-  box-shadow: 0 8px 20px rgba(0,0,0,.5);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.35);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  scroll-margin-top: 90px; /* height of sticky tabs */
 }
 
+/* Clean look + no wrapping */
 .tabs {
   flex-wrap: nowrap;
   overflow-x: auto;
+  scrollbar-width: none;
   padding: 0 12px;
   justify-content: flex-start;
 }
@@ -726,6 +745,7 @@ body {
 .menu-item .ingredients {
   font-size: 0.9rem;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   max-height: 4.6em;
 }
 
@@ -760,6 +780,24 @@ body {
 .social-link {
   width: 52px;
   height: 52px;
+}
+
+/* ✅ MOBILE: Move Build-Your-Own under Tabs */
+.build-your-own {
+  order: 2;
+}
+
+.main-menu {
+  order: 1;
+}
+
+.contact-footer {
+  order: 3;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
 }
 }
 
@@ -1022,7 +1060,7 @@ body {
         }
       ],
       appetizers: [
-        { name: "سلطة سيزر", description: "", price: "34,000" },
+        { name: "سلطة سيزر", description: "", price: "40,000" },
         { name: "باستا", description: "", price: "20,000" },
         { name: "كول سلو", description: "", price: "6,000" },
         { name: "فاير فرايز", description: "بطاطا مقلية - صوص شيدر - هالبينيو", price: "40,000" },
@@ -1127,7 +1165,7 @@ body {
     }
 
     // Function to switch category
-function showCategory(category, el) {
+    function showCategory(category, el) {
   currentCategory = category;
 
   document.querySelectorAll('.tab').forEach(tab => {
@@ -1136,11 +1174,55 @@ function showCategory(category, el) {
 
   el.classList.add('active');
   renderMenu();
+
+  // ✅ REAL MOBILE-APP SCROLL BEHAVIOR
+  if (window.innerWidth <= 768) {
+    const tabsWrapper = document.querySelector('.tabs-wrapper');
+
+    setTimeout(() => {
+      tabsWrapper.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 120); // wait for menu render
+  }
 }
+
 
 
     // Initial render
     renderMenu();
+
+    // ✅ Mobile entrance animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    // Observe menu items dynamically
+    function observeMenu() {
+      document.querySelectorAll('.menu-item').forEach(item => {
+        item.classList.add('reveal');
+        observer.observe(item);
+      });
+    }
+
+    // Modify your renderMenu function:
+    const originalRenderMenu = renderMenu;
+
+    renderMenu = function () {
+      originalRenderMenu();
+      setTimeout(observeMenu, 50);
+    };
+
+    // Re-run observer after initial render
+    setTimeout(observeMenu, 100);
   </script>
 
 </body>
