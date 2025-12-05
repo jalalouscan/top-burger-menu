@@ -6,8 +6,8 @@
   <title>TOP BURGER - Menu</title>
   <style>
     :root {
-      --gold-main: #f6c940;   /* stable premium gold */
-      --gold-soft: #ffcc00;
+      --gold-main: #FFF600;   
+      --gold-soft: #FFF600;
       --bg-dark: #1e1b14;
     }
 
@@ -78,7 +78,7 @@
       font-size: 5rem;
       font-weight: 900;
       letter-spacing: 4px;
-      background: linear-gradient(90deg, var(--gold-main), #ff9900);
+      background: linear-gradient(90deg, var(--gold-main), #FFF600);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -694,6 +694,10 @@ body {
 }
 
 /* 🔥 MOBILE: Fix corrupted sticky tabs */
+#tabs-scroll-anchor {
+  height: 1px;
+}
+
 .tabs-wrapper {
   position: sticky;
   top: 0;
@@ -874,6 +878,7 @@ body {
     <div class="main-menu">
       
       <!-- Category Tabs -->
+      <div id="tabs-scroll-anchor"></div>
       <div class="tabs-wrapper">
         <div class="tabs-label">— BEST IN TOWN —</div>
 
@@ -1175,16 +1180,21 @@ body {
   el.classList.add('active');
   renderMenu();
 
-  // ✅ REAL MOBILE-APP SCROLL BEHAVIOR
+  // ✅ GUARANTEED mobile snap-to-tabs behavior
   if (window.innerWidth <= 768) {
-    const tabsWrapper = document.querySelector('.tabs-wrapper');
+    const anchor = document.getElementById('tabs-scroll-anchor');
 
     setTimeout(() => {
-      tabsWrapper.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+      const y =
+        anchor.getBoundingClientRect().top +
+        window.pageYOffset -
+        12; // small spacing under sticky
+
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth'
       });
-    }, 120); // wait for menu render
+    }, 140);
   }
 }
 
