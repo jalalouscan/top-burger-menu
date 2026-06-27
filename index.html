@@ -11,7 +11,7 @@
       --bg-dark: #1e1b14;
     }
 
-    /* Force consistent color rendering */
+    /* Force consistent color renderingg */
     html {
       -webkit-text-size-adjust: 100%;
       color-scheme: dark;
@@ -34,31 +34,14 @@
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
-    /* Animated Gradient Mesh Background */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(184, 134, 11, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(218, 165, 32, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 70% 20%, rgba(246, 201, 64, 0.08) 0%, transparent 50%);
-      background-size: 200% 200%;
-      animation: meshMove 20s ease infinite;
-      opacity: 0.6;
-    }
-
     body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background: radial-gradient(circle at top, rgba(246,201,64,0.04), transparent 60%);
-      z-index: 0;
-    }
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at top, rgba(246,201,64,0.04), transparent 60%);
+  z-index: 0;
+}
 
 
     /* Hero Section */
@@ -129,6 +112,51 @@
       text-shadow: 0 0 12px rgba(246, 201, 64, 0.8);
       letter-spacing: 2px;
       opacity: 0.9;
+    }
+
+    /* Tax Notice */
+    .tax-notice {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: min(1400px, calc(100% - 40px));
+      max-width: 1400px;
+      margin: 0 auto 22px;
+      padding: 10px 20px;
+      direction: rtl;
+      text-align: center;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      letter-spacing: 0.2px;
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(14, 13, 10, 0.78);
+      border: 1px solid rgba(255, 246, 0, 0.32);
+      border-radius: 999px;
+      box-shadow:
+        0 0 20px rgba(255, 246, 0, 0.1),
+        inset 0 1px 0 rgba(255, 246, 0, 0.07);
+      backdrop-filter: blur(6px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .tax-notice-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-style: italic;
+      font-family: Georgia, 'Times New Roman', serif;
+      line-height: 1;
+      color: #1e1b14;
+      background: linear-gradient(135deg, var(--gold-main), #e8dc00);
+      box-shadow: 0 0 14px rgba(255, 246, 0, 0.4);
     }
 
     /* Container */
@@ -213,9 +241,24 @@
     }
 
     .build-price {
-      font-size: 0.85rem;
-      color: #fff;
       margin-top: 5px;
+    }
+
+    .build-price .price-currency {
+      text-align: center;
+    }
+
+    .build-price .price-new {
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--gold-main);
+      text-shadow: 0 0 10px rgba(246, 201, 64, 0.5);
+    }
+
+    .build-price .price-old {
+      font-size: 0.7rem;
+      color: #aaa;
+      margin-top: 2px;
     }
 
     .build-your-own h3 {
@@ -261,9 +304,23 @@
       color: #ccc;
     }
 
-    .sauce-price {
+    /* .sauce-price styles are handled by .sauce-price .price-currency below */
+
+    .sauce-price .price-currency {
+      text-align: right;
+    }
+
+    .sauce-price .price-new {
+      font-size: 0.85rem;
+      font-weight: 900;
       color: var(--gold-main);
-      font-weight: bold;
+      text-shadow: 0 0 8px rgba(246, 201, 64, 0.4);
+    }
+
+    .sauce-price .price-old {
+      font-size: 0.65rem;
+      color: #aaa;
+      margin-top: 2px;
     }
 
     /* Main Menu */
@@ -389,6 +446,261 @@
       font-weight: bold;
     }
 
+    .new-badge {
+      position: absolute;
+      top: -12px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      padding: 6px 14px;
+      border-radius: 22px;
+
+      background: linear-gradient(135deg, #ff3c00, #ffb300);
+      color: #0e0d0a;
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+
+      box-shadow:
+        0 0 18px rgba(255, 120, 0, 0.9),
+        0 0 32px rgba(255, 80, 0, 0.6);
+
+      z-index: 5;
+    }
+
+    /* Flame animation */
+    .flame {
+      display: inline-block;
+      animation: flameFlicker 1.1s infinite ease-in-out;
+      transform-origin: bottom center;
+      filter: drop-shadow(0 0 6px rgba(255, 140, 0, 0.9));
+    }
+
+    @keyframes flameFlicker {
+      0% {
+        transform: scale(1) rotate(-4deg);
+        opacity: 0.9;
+      }
+      25% {
+        transform: scale(1.15) rotate(4deg);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(0.95) rotate(-2deg);
+        opacity: 0.85;
+      }
+      75% {
+        transform: scale(1.1) rotate(3deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1) rotate(-4deg);
+        opacity: 0.9;
+      }
+    }
+
+    .new-text {
+      text-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Pulse on hover only (desktop) */
+    @media (hover: hover) {
+      .menu-item:hover .flame {
+        animation-duration: 0.6s;
+      }
+    }
+
+    /* Stronger flame for featured + new */
+    .menu-item.featured .new-badge {
+      box-shadow:
+        0 0 25px rgba(255, 140, 0, 1),
+        0 0 50px rgba(255, 80, 0, 0.9);
+    }
+
+    /* Mobile-friendly (less motion) */
+    @media (max-width: 768px) {
+      .flame {
+        animation-duration: 1.6s;
+      }
+    }
+
+    .menu-image {
+      width: 100%;
+      height: 190px;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 15px;
+      position: relative;
+      background: #111;
+      cursor: pointer;
+    }
+
+    .menu-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease;
+      cursor: pointer;
+    }
+
+    /* Premium hover effect (desktop only) */
+    @media (hover: hover) {
+      .menu-item:hover .menu-image img {
+        transform: scale(1.08);
+      }
+    }
+
+    /* Soft gold overlay */
+    .menu-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.1),
+        rgba(0,0,0,0.6)
+      );
+      pointer-events: none;
+    }
+
+    /* Fullscreen Image Modal */
+    .image-modal {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      animation: fadeIn 0.3s ease;
+      cursor: pointer;
+    }
+
+    .image-modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-modal-content {
+      position: relative;
+      max-width: 95%;
+      max-height: 95%;
+      margin: auto;
+      animation: zoomIn 0.3s ease;
+    }
+
+    .image-modal-content img {
+      max-width: 100%;
+      max-height: 95vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    }
+
+    .image-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      cursor: pointer;
+      z-index: 10001;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(14, 13, 10, 0.85);
+      border-radius: 50%;
+      border: 2px solid var(--gold-main);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 
+        0 0 0 0 rgba(255, 246, 0, 0.4),
+        0 4px 12px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+    }
+
+    .image-modal-close svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--gold-main);
+      stroke-width: 2.5;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 0 4px rgba(255, 246, 0, 0.6));
+    }
+
+    .image-modal-close:hover {
+      background: var(--gold-main);
+      transform: scale(1.12) rotate(90deg);
+      box-shadow: 
+        0 0 20px rgba(255, 246, 0, 0.6),
+        0 8px 24px rgba(0, 0, 0, 0.6);
+      border-color: var(--gold-main);
+    }
+
+    .image-modal-close:hover svg {
+      stroke: #0e0d0a;
+      filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
+    }
+
+    .image-modal-close:active {
+      transform: scale(1.05) rotate(90deg);
+    }
+
+    .image-modal-title {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--gold-main);
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      padding: 10px 20px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+      z-index: 10001;
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Mobile adjustments for modal */
+    @media (max-width: 768px) {
+      .image-modal-close {
+        top: 10px;
+        right: 15px;
+        width: 48px;
+        height: 48px;
+      }
+
+      .image-modal-close svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .image-modal-title {
+        font-size: 1.1rem;
+        bottom: 10px;
+        padding: 8px 15px;
+      }
+    }
+
     .menu-item h3 {
       font-size: 1.8rem;
       margin-bottom: 12px;
@@ -409,6 +721,16 @@
   -webkit-box-orient: vertical;
   max-height: 3.2em;   /* Firefox fallback */
 }
+
+    /* Variant ingredients should show in full (no truncation) */
+    .sub-type .ingredients {
+      overflow: visible;
+      display: block;
+      -webkit-line-clamp: none;
+      line-clamp: none;
+      -webkit-box-orient: initial;
+      max-height: none;
+    }
 
 
     /* .menu-item .ingredients {
@@ -464,12 +786,33 @@
       text-shadow: 0 0 10px rgba(246, 201, 64, 0.5);
     }
 
+    .price-currency {
+      text-align: center;
+    }
+
+    .price-new {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--gold-main);
+      text-shadow: 0 0 10px rgba(246, 201, 64, 0.5);
+    }
+
+    .price-old {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-top: 4px;
+    }
+
     .single-price {
       font-size: 2rem;
       font-weight: 900;
       color: #fff;
       text-align: center;
       text-shadow: 0 0 10px rgba(246, 201, 64, 0.5);
+    }
+
+    .single-price-currency {
+      text-align: center;
     }
 
     /* Sub-types */
@@ -632,22 +975,6 @@
       to { opacity: 1; }
     }
 
-    /* Gradient Mesh Animation */
-    @keyframes meshMove {
-      0%, 100% {
-        background-position: 0% 0%, 100% 100%, 0% 100%, 100% 0%;
-      }
-      25% {
-        background-position: 100% 0%, 0% 100%, 100% 100%, 0% 0%;
-      }
-      50% {
-        background-position: 100% 100%, 0% 0%, 100% 0%, 0% 100%;
-      }
-      75% {
-        background-position: 0% 100%, 100% 0%, 0% 0%, 100% 100%;
-      }
-    }
-
     /* ✅ MOBILE ENTRANCE ANIMATIONS */
     .reveal {
       opacity: 0;
@@ -696,6 +1023,21 @@ body {
   font-size: 0.75rem;
 }
 
+.tax-notice {
+  width: calc(100% - 24px);
+  margin: 0 auto 12px;
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  gap: 8px;
+  border-radius: 14px;
+}
+
+.tax-notice-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 0.62rem;
+}
+
 /* --- MAIN LAYOUT becomes vertical --- */
 .container {
   flex-direction: column;
@@ -726,7 +1068,7 @@ body {
   height: 64px;
 }
 
-/* 🔥 MOBILE: Fix corrupted sticky tabs */
+
 #tabs-scroll-anchor {
   height: 1px;
 }
@@ -786,12 +1128,41 @@ body {
   max-height: 4.6em;
 }
 
+.menu-image {
+  height: 160px;
+  border-radius: 14px;
+}
+
 .price-value {
   font-size: 1.35rem;
 }
 
+.price-currency {
+  text-align: center;
+}
+
+.price-new {
+  font-size: 1.5rem;
+}
+
+.price-old {
+  font-size: 0.85rem;
+}
+
 .single-price {
   font-size: 1.6rem;
+}
+
+.single-price-currency {
+  text-align: center;
+}
+
+.single-price-currency .price-new {
+  font-size: 1.6rem;
+}
+
+.single-price-currency .price-old {
+  font-size: 0.85rem;
 }
 
 /* --- TOUCH instead of HOVER --- */
@@ -852,6 +1223,11 @@ body {
     </div>
   </div>
 
+  <div class="tax-notice" role="note" aria-label="تنويه حول الأسعار">
+    <span class="tax-notice-icon">i</span>
+    <span>تنويه: الأسعار المعروضة لا تشمل الضريبة.</span>
+  </div>
+
   <div class="container">
     
 <!-- Build Your Own Burger Section -->
@@ -861,18 +1237,18 @@ body {
   <div class="build-options">
     <div class="build-option">
       <div class="build-option-img">
-        <!-- Add your image: <img src="path/to/beef.jpg" alt="لحمة"> -->
+        <img src="images/بيف كلاسك.jpg">
       </div>
       <div class="build-option-label">لحمة</div>
-      <div class="build-price">46,000</div>
+      <div class="build-price" data-price='{"old_currency": "60,000", "new_currency": "600"}'></div>
     </div>
 
     <div class="build-option">
       <div class="build-option-img">
-        <!-- Add your image: <img src="path/to/chicken.jpg" alt="دجاج"> -->
+        <img src="images/كلاسيك تشكن.jpg">
       </div>
       <div class="build-option-label">دجاج</div>
-      <div class="build-price">25,000</div>
+      <div class="build-price" data-price='{"old_currency": "40,000", "new_currency": "400"}'></div>
     </div>
   </div>
 
@@ -888,21 +1264,21 @@ body {
       <div class="sauces-section">
         <h3>الصوصات</h3>
         <div class="sauce-grid">
-          <div class="sauce-item"><span class="sauce-name">بصل مكرمل</span><span class="sauce-price">5,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">بيج تيستي</span><span class="sauce-price">5,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">شيدر شرايح</span><span class="sauce-price">5,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">باربيكيو</span><span class="sauce-price">5,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">شيدر</span><span class="sauce-price">8,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">حلقات بصل مقلية</span><span class="sauce-price">5,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">كتشب</span><span class="sauce-price">5,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">هني ماسترد</span><span class="sauce-price">5,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">ديناميت</span><span class="sauce-price">5,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">بافلو</span><span class="sauce-price">8,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">مشروم</span><span class="sauce-price">5,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">مايونيز</span><span class="sauce-price">5,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">رانش</span><span class="sauce-price">5,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">صوص كوكتيل</span><span class="sauce-price">5,000</span></div>
-          <div class="sauce-item"><span class="sauce-name">جبنة موزريلا</span><span class="sauce-price">5,000</span></div>
+          <div class="sauce-item"><span class="sauce-name">بصل مكرمل</span><span class="sauce-price" data-price='{"old_currency": "5,000", "new_currency": "50"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">بيج تيستي</span><span class="sauce-price" data-price='{"old_currency": "5,000", "new_currency": "50"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">شيدر شرايح</span><span class="sauce-price" data-price='{"old_currency": "5,000", "new_currency": "50"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">باربيكيو</span><span class="sauce-price" data-price='{"old_currency": "5,000", "new_currency": "50"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">شيدر</span><span class="sauce-price" data-price='{"old_currency": "8,000", "new_currency": "80"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">حلقات بصل مقلية</span><span class="sauce-price" data-price='{"old_currency": "5,000", "new_currency": "50"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">كتشب</span><span class="sauce-price" data-price='{"old_currency": "5,000", "new_currency": "50"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">هني ماسترد</span><span class="sauce-price" data-price='{"old_currency": "5,000", "new_currency": "50"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">ديناميت</span><span class="sauce-price" data-price='{"old_currency": "5,000", "new_currency": "50"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">بافلو</span><span class="sauce-price" data-price='{"old_currency": "8,000", "new_currency": "80"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">مشروم</span><span class="sauce-price" data-price='{"old_currency": "5,000", "new_currency": "50"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">مايونيز</span><span class="sauce-price" data-price='{"old_currency": "5,000", "new_currency": "50"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">رانش</span><span class="sauce-price" data-price='{"old_currency": "5,000", "new_currency": "50"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">صوص كوكتيل</span><span class="sauce-price" data-price='{"old_currency": "5,000", "new_currency": "50"}'></span></div>
+          <div class="sauce-item"><span class="sauce-name">جبنة موزريلا</span><span class="sauce-price" data-price='{"old_currency": "5,000", "new_currency": "50"}'></span></div>
         </div>
       </div>
     </div>
@@ -1013,103 +1389,228 @@ body {
     // Menu Data from JSON
     const menuData = {
       beef: [
+      {
+          name: "تشيز برغر رول",
+          image: "images/cheeseburger_roll.jpg",
+          isNew: true,
+          ingredients: "3 لحمة، خبزة تورتيلا، 3 شرائح شيدر، صوص شيدر، جبنة موزريلا، بطاطا ",
+          sandwich_price: { old_currency: "100,000", new_currency: "1000" },
+          meal_price: { old_currency: "110,000", new_currency: "1100" }
+        },
+        {
+          name: "ميني لحمة",
+          image: "images/mini_beef.jpg",
+          isNew: true,
+          ingredients: "لحمة، مايونيز، صوص شيدر، حلقة بصل",
+          sandwich_price: { old_currency: "37,000", new_currency: "370" },
+          meal_price: { old_currency: "70,000", new_currency: "700" }
+        },
+        {
+          name: "اسبيتشال بيف",
+          image: "images/special_beef.jpg",
+          isNew: true,
+          ingredients: "لحمة، خبزة صغيرة، خس، بيضة، بصل مكرمل، صوص كوكتيل، بيكن",
+          sandwich_price: { old_currency: "75,000", new_currency: "750" },
+          meal_price: { old_currency: "90,000", new_currency: "900" }
+        },
         {
           name: "توب برغر",
+          image: "images/توب برغر.jpg",
           ingredients: "لحمة، مايونيز، خس، مشروم، كريمة طبخ، جبنة موزريلا، صويا صوص، باربكيو",
-          sandwich_price: "53,000",
-          meal_price: "70,000"
+          sandwich_price: { old_currency: "75,000", new_currency: "750" },
+          meal_price: { old_currency: "85,000", new_currency: "850" }
         },
         {
           name: "باربكيو بيف",
+          image: "images/بيف باربكيو.jpg",
           ingredients: "لحمة، باربكيو، حلقات بصل، قطع بيكن، جبنة موزريلا، خس، مخلل",
-          sandwich_price: "57,000",
-          meal_price: "76,000"
+          sandwich_price: { old_currency: "80,000", new_currency: "800" },
+          meal_price: { old_currency: "90,000", new_currency: "900" }
         },
         {
           name: "بيف كلاسيك",
+          image: "images/بيف كلاسك.jpg",
           ingredients: "لحمة، بيغ تيستي، مخلل، بندورة، بصل مكرمل",
-          sandwich_price: "46,000",
-          meal_price: "66,000"
+          sandwich_price: { old_currency: "68,000", new_currency: "680" },
+          meal_price: { old_currency: "80,000", new_currency: "800" }
         },
         {
           name: "سماش برغر",
+          image: "images/سماش برغر.jpg",
           ingredients: "لحمة، مايونيز، مخلل، 2 قطعة شيدر، بصل مكرمل",
           types: [
-            { type: "عادي", sandwich_price: "47,000", meal_price: "60,000" },
-            { type: "دبل", sandwich_price: "66,000", meal_price: "80,000" },
-            { type: "كواترو", sandwich_price: "87,000", meal_price: "99,000" }
+            { type: "عادي", sandwich_price: { old_currency: "80,000", new_currency: "800" }, meal_price: { old_currency: "85,000", new_currency: "850" } },
+            { type: "دبل", sandwich_price: { old_currency: "95,000", new_currency: "950" }, meal_price: { old_currency: "110,000", new_currency: "1100" } },
+            { type: "كواترو", sandwich_price: { old_currency: "115,000", new_currency: "1150" }, meal_price: { old_currency: "130,000", new_currency: "1300" } }
           ]
         },
         {
           name: "بيف هني مسترد",
+          image: "images/بيف هني مسترد.jpg",
           ingredients: "لحمة، سلايد شيدر، خس، بندورة، مخلل، بصل مكرمل، هني مسترد",
-          sandwich_price: "48,000",
-          meal_price: "64,000"
+          sandwich_price: { old_currency: "68,000", new_currency: "680" },
+          meal_price: { old_currency: "88,000", new_currency: "880" }
         }
       ],
       chicken: [
+       {
+        name: "شاورما غريل دجاج",
+        image: "images/chicken_shawrma.jpg",
+        isNew: true,
+        ingredients: "دجاج، خبزة تورتيلا، كريم توم، مخلل، دبس، حدّ من اختيارك",
+        sandwich_price: { old_currency: "40,000", new_currency: "400" },
+        meal_price: { old_currency: "50,000", new_currency: "500" }
+        },
+       {
+        name: "ميني دجاج",
+        image: "images/mini_chicken.jpg",
+        isNew: true,
+        ingredients: "دجاج، مايونيز، خس",
+        sandwich_price: { old_currency: "28,000", new_currency: "280" },
+        meal_price: { old_currency: "40,000", new_currency: "400" }
+        },
+       {
+        name: "سندويشة داينمت",
+        isNew: true,
+        ingredients: "دجاج، خس، مايونيز، صوص شيدر، هالبينو",
+        sandwich_price: { old_currency: "45,000", new_currency: "450" },
+        meal_price: { old_currency: "55,000", new_currency: "550" }
+        },
+       {
+        name: "كرانشي تشيكن برغر",
+        isNew: false,
+        ingredients: "دجاج، خبزة كبيرة، مايونيز، خس، كولسلو، جبنة موزاريلا، سلايد شيدر، تركي مدخن",
+        sandwich_price: { old_currency: "52,000", new_currency: "520" },
+        meal_price: { old_currency: "70,000", new_currency: "700" }
+        },
         {
-          name: "وجبة كريسبي",
-          ingredients: "٥ قطع دجاج، خبزة، كول سلو، مايونيز، كاتشب، بطاطا، باستا",
-          meal_price: "54,000",
-          featured: true
+        name: "غريل تشيكن",
+        isNew: false,
+        ingredients: "دجاج، خبزة كبيرة، تركي مدخن، خس، صوص كوكتيل، جبنة موزاريلا",
+        sandwich_price: { old_currency: "50,000", new_currency: "500" },
+        meal_price: { old_currency: "70,000", new_currency: "700" }
+        },
+        {
+          name: "كريسبي",
+          image: "images/وجبة كريسبي.jpg",
+          featured: true,
+          variants: [
+          {
+              label: "وجبة",
+              ingredients: "ثلاث قطع دجاج، خبزة، كول سلو، مايونيز، كاتشب، بطاطا، باستا",
+              price: {
+                old_currency: "58,000",
+                new_currency: "580"
+              }
+            },
+            {
+              label: "ساندويش",
+              ingredients: "خبزة فيينا، دجاج كريسبي، كول سلو، مايونيز، خس، صوص شيدر، صوص باربيكيو، ذرة",
+              price: {
+                old_currency: "45,000",
+                new_currency: "450"
+              }
+            },
+          ]
         },
         {
           name: "تشكن رانش",
+          image: "images/تشكن رانش.jpg",
           ingredients: "دجاج مقلي، كول سلو، صوص رانش، سلايد شيدر، تركي مدخن",
-          sandwich_price: "33,500",
-          meal_price: "45,000"
+          sandwich_price: { old_currency: "52,000", new_currency: "520" },
+          meal_price: { old_currency: "70,000", new_currency: "700" }
         },
         {
           name: "فاير برغر",
+          image: "images/فاير برغر.jpg",
           ingredients: "قطعة دجاج مشوي، دجاج مقلي، خس، هالابينو، جبنة موزريلا، صوص بالفالو، تركي مدخن",
-          sandwich_price: "45,000",
-          meal_price: "58,000"
+          sandwich_price: { old_currency: "62,000", new_currency: "620" },
+          meal_price: { old_currency: "80,000", new_currency: "800" }
         },
         {
           name: "اوليڤانو تشكن",
+          image: "images/اوليفانو تشكن.jpg",
           ingredients: "دجاج مقلي، كول سلو، مايونيز، زيتون، فليفلة، جبنة موزريلا، صوص شيدر، خس",
-          sandwich_price: "36,000",
-          meal_price: "49,000"
+          sandwich_price: { old_currency: "50,000", new_currency: "500" },
+          meal_price: { old_currency: "65,000", new_currency: "650" }
         },
         {
           name: "تشيز تشكن",
+          image: "images/تشيز تشكن.jpg",
           ingredients: "دجاج مقلي، كول سلو، مايونيز، جبنة موزريلا، صوص شيدر، خس",
-          sandwich_price: "32,000",
-          meal_price: "47,000"
+          sandwich_price: { old_currency: "50,000", new_currency: "500" },
+          meal_price: { old_currency: "65,000", new_currency: "650" }
         },
         {
           name: "باربكيو تشكن",
+          image: "images/باربيكيو تشكن.jpg",
           ingredients: "دجاج مقلي، شي باربكيو، خس، مايونيز، مخلل",
-          sandwich_price: "25,000",
-          meal_price: "40,000"
+          sandwich_price: { old_currency: "45,000", new_currency: "450" },
+          meal_price: { old_currency: "80,000", new_currency: "800" }
         },
         {
           name: "كلاسيك تشكن",
+          image: "images/كلاسيك تشكن.jpg",
           ingredients: "دجاج مقلي، كول سلو، مايونيز، خس، مخلل، جبنة موزريلا، صوص رانش",
-          sandwich_price: "33,000",
-          meal_price: "74,000"
+          sandwich_price: { old_currency: "50,000", new_currency: "500" },
+          meal_price: { old_currency: "65,000", new_currency: "650" }
         },
         {
           name: "تشكن هني مسترد",
+          image: "images/تشكن هني مسترد.jpg",
           ingredients: "دجاج مقلي، صوص هني مسترد، سلايد شيدر، خس، بندورة مخلل، بصل مكرمل",
-          sandwich_price: "30,000",
-          meal_price: "45,000"
+          sandwich_price: { old_currency: "45,000", new_currency: "450" },
+          meal_price: { old_currency: "60,000", new_currency: "600" }
         }
       ],
       appetizers: [
-        { name: "سلطة سيزر", description: "", price: "40,000" },
-        { name: "باستا", description: "", price: "20,000" },
-        { name: "كول سلو", description: "", price: "6,000" },
-        { name: "فاير فرايز", description: "بطاطا مقلية - صوص شيدر - هالبينيو", price: "40,000" },
-        { name: "لود فرايز", description: "بطاطا مقلية - قطع كرسبي - صوص (من اختيارك)", price: "34,000" },
-        { name: "كلاسيك فرايز", description: "بطاطا مقلية - ملح", price: "20,000" },
-        { name: "مياه", price: "5,000" },
-        { name: "مشروبات غازية", price: "10,000" }
+        { name: "موزريلا ستيك", image: "", description: "يتضمن 4 قطع ", price: { old_currency: "25,000", new_currency: "250" } },
+        { name: "حلقات بصل", image: "", description: "يتتضمن 6 قطع", price: { old_currency: "15,000", new_currency: "150" } },
+        { name: "سلطة سيزر", image: "images/سيزر.jpg", description: "", price: { old_currency: "55,000", new_currency: "550" } },
+        { name: "باستا", image: "images/باستا.jpg", description: "", price: { old_currency: "20,000", new_currency: "200" } },
+        { name: "كول سلو", image: "images/كول سلو.jpg", description: "", price: { old_currency: "12,000", new_currency: "120" } },
+        { name: "فاير فرايز", image: "images/داينمت فرايز.jpg", description: "بطاطا مقلية - صوص شيدر - هالبينيو", price: { old_currency: "55,000", new_currency: "550" } },
+        { name: "لود فرايز", image: "images/لود فرايز.jpg", description: "بطاطا مقلية - قطع كرسبي - صوص (من اختيارك)", price: { old_currency: "65,000", new_currency: "650" } },
+        { name: "كلاسيك فرايز", image: "", description: "بطاطا مقلية - ملح", price: { old_currency: "30,000", new_currency: "300" } },
+        { name: "مياه", image: "", price: { old_currency: "5,000", new_currency: "50" } },
+        { name: "مشروبات غازية", image: "", price: { old_currency: "10,000", new_currency: "100" } }
       ]
+      // Old version without images:
+      // appetizers: [
+      //   { name: "سلطة سيزر", description: "", price: "40,000" },
+      //   { name: "باستا", description: "", price: "20,000" },
+      //   { name: "كول سلو", description: "", price: "6,000" },
+      //   { name: "فاير فرايز", description: "بطاطا مقلية - صوص شيدر - هالبينيو", price: "40,000" },
+      //   { name: "لود فرايز", description: "بطاطا مقلية - قطع كرسبي - صوص (من اختيارك)", price: "34,000" },
+      //   { name: "كلاسيك فرايز", description: "بطاطا مقلية - ملح", price: "20,000" },
+      //   { name: "مياه", price: "5,000" },
+      //   { name: "مشروبات غازية", price: "10,000" }
+      // ]
     };
 
     let currentCategory = 'beef';
+
+    // Helper function to render currency price display (Primary + Secondary)
+    function renderCurrencyPrice(priceObj) {
+      if (!priceObj || typeof priceObj !== 'object') {
+        return `<span class="price-new">${priceObj || ''}</span>`;
+      }
+
+      const oldC = priceObj.old_currency;
+      const newC = priceObj.new_currency;
+
+      // If one currency missing, show the available one
+      if (!oldC || !newC) {
+        return `<span class="price-new">${newC || oldC}</span>`;
+      }
+
+      return `
+        <div class="price-currency">
+          <div class="price-new">${newC}</div>
+          <div class="price-old">العملة القديمة: ${oldC}</div>
+        </div>
+      `;
+    }
 
     // Function to render menu
     function renderMenu() {
@@ -1129,9 +1630,35 @@ body {
           content += `<div class="featured-badge">وجبة مميزة</div>`;
         }
         
+        if (item.isNew) {
+          content += `
+            <div class="new-badge">
+              <span class="new-text">جديدنا</span>
+              <span class="flame">🔥</span>
+            </div>
+          `;
+        }
+        
+        if (item.image) {
+          content += `
+            <div class="menu-image">
+              <img 
+                src="${item.image}" 
+                alt="${item.name}"
+                loading="lazy"
+                onerror="this.style.display='none'"
+                data-image-src="${item.image}"
+                data-image-title="${item.name}"
+                class="menu-image-clickable"
+              >
+            </div>
+          `;
+        }
+        
         content += `<h3>${item.name}</h3>`;
         
-        if (item.ingredients) {
+        // Only show main ingredients if there are no variants (variants have their own ingredients)
+        if (item.ingredients && !item.variants) {
           content += `<div class="ingredients">${item.ingredients}</div>`;
         }
         
@@ -1139,8 +1666,24 @@ body {
           content += `<div class="description">${item.description}</div>`;
         }
         
+        // Handle items with variants (sandwich / meal split)
+        if (item.variants) {
+          content += `<div class="sub-types">`;
+          item.variants.forEach(v => {
+            content += `
+              <div class="sub-type">
+                <div class="sub-type-name">${v.label}</div>
+                <div class="ingredients">${v.ingredients}</div>
+                <div class="single-price-currency">
+                  ${renderCurrencyPrice(v.price)}
+                </div>
+              </div>
+            `;
+          });
+          content += `</div>`;
+        }
         // Handle items with sub-types (like سماش برغر)
-        if (item.types) {
+        else if (item.types) {
           content += `<div class="sub-types">`;
           item.types.forEach(type => {
             content += `
@@ -1149,11 +1692,11 @@ body {
                 <div class="prices">
                   <div class="price-box">
                     <div class="price-label">ساندويش</div>
-                    <div class="price-value">${type.sandwich_price}</div>
+                    ${renderCurrencyPrice(type.sandwich_price)}
                   </div>
                   <div class="price-box">
                     <div class="price-label">وجبة</div>
-                    <div class="price-value">${type.meal_price}</div>
+                    ${renderCurrencyPrice(type.meal_price)}
                   </div>
                 </div>
               </div>
@@ -1167,11 +1710,22 @@ body {
             <div class="prices">
               <div class="price-box">
                 <div class="price-label">ساندويش</div>
-                <div class="price-value">${item.sandwich_price}</div>
+                ${renderCurrencyPrice(item.sandwich_price)}
               </div>
               <div class="price-box">
                 <div class="price-label">وجبة</div>
-                <div class="price-value">${item.meal_price}</div>
+                ${renderCurrencyPrice(item.meal_price)}
+              </div>
+            </div>
+          `;
+        }
+        // Handle sandwich-only items
+        else if (item.sandwich_price && !item.meal_price) {
+          content += `
+            <div class="prices">
+              <div class="price-box">
+                <div class="price-label">ساندويش</div>
+                ${renderCurrencyPrice(item.sandwich_price)}
               </div>
             </div>
           `;
@@ -1182,14 +1736,18 @@ body {
             <div class="prices">
               <div class="price-box">
                 <div class="price-label">وجبة</div>
-                <div class="price-value">${item.meal_price}</div>
+                ${renderCurrencyPrice(item.meal_price)}
               </div>
             </div>
           `;
         }
         // Handle items with single price (drinks, appetizers)
         else if (item.price) {
-          content += `<div class="single-price">${item.price}</div>`;
+          if (typeof item.price === 'object') {
+            content += `<div class="single-price-currency">${renderCurrencyPrice(item.price)}</div>`;
+          } else {
+            content += `<div class="single-price">${item.price}</div>`;
+          }
         }
         
         div.innerHTML = content;
@@ -1266,7 +1824,101 @@ body {
 
     // Re-run observer after initial render
     setTimeout(observeMenu, 100);
+
+    // Fullscreen Image Modal Functions
+    function openImageModal(imageSrc, imageTitle) {
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+      const modalTitle = document.getElementById('modalTitle');
+      
+      modalImg.src = imageSrc;
+      modalTitle.textContent = imageTitle;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById('imageModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+    }
+
+    // Event delegation for image clicks
+    document.addEventListener('click', function(event) {
+      if (event.target.classList.contains('menu-image-clickable')) {
+        const imageSrc = event.target.getAttribute('data-image-src');
+        const imageTitle = event.target.getAttribute('data-image-title');
+        openImageModal(imageSrc, imageTitle);
+      }
+    });
+
+    // Close modal on ESC key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeImageModal();
+      }
+    });
+
+    // Close modal when clicking outside the image
+    // Wait for DOM to be ready
+    function setupModalListeners() {
+      const modal = document.getElementById('imageModal');
+      if (modal) {
+        modal.addEventListener('click', function(event) {
+          if (event.target === this || event.target.classList.contains('image-modal-close')) {
+            closeImageModal();
+          }
+        });
+      }
+    }
+
+    // Render build prices and sauce prices with currency display
+    function renderStaticPrices() {
+      // Render build prices
+      document.querySelectorAll('.build-price[data-price]').forEach(el => {
+        try {
+          const priceData = JSON.parse(el.getAttribute('data-price'));
+          el.innerHTML = renderCurrencyPrice(priceData);
+        } catch (e) {
+          console.error('Error parsing build price:', e);
+        }
+      });
+
+      // Render sauce prices
+      document.querySelectorAll('.sauce-price[data-price]').forEach(el => {
+        try {
+          const priceData = JSON.parse(el.getAttribute('data-price'));
+          el.innerHTML = renderCurrencyPrice(priceData);
+        } catch (e) {
+          console.error('Error parsing sauce price:', e);
+        }
+      });
+    }
+
+    // Setup listeners when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        setupModalListeners();
+        renderStaticPrices();
+      });
+    } else {
+      setupModalListeners();
+      renderStaticPrices();
+    }
   </script>
+
+  <!-- Fullscreen Image Modal -->
+  <div id="imageModal" class="image-modal">
+    <span class="image-modal-close" onclick="closeImageModal()">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <div class="image-modal-content">
+      <img id="modalImage" src="" alt="">
+      <div class="image-modal-title" id="modalTitle"></div>
+    </div>
+  </div>
 
 </body>
 </html>
